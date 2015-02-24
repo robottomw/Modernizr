@@ -187,6 +187,14 @@ module.exports = function( grunt ) {
 
   });
 
+  grunt.registerMultiTask('debugAppVeyor', 'output files while im trying to debug appveyor faliures', function() {
+    var reports = grunt.file.expand('test/coverage/reports/**/*.json');
+    reports.forEach(function(report) {
+      console.log(grunt.file.read(report));
+    });
+  });
+
+
   grunt.registerMultiTask('generate', 'Create a version of Modernizr from Grunt', function() {
     var done = this.async();
     var config = require('./lib/config-all');
@@ -204,7 +212,7 @@ module.exports = function( grunt ) {
   grunt.registerTask('nodeTests', ['mochaTest']);
 
   // Testing tasks
-  grunt.registerTask('test', ['clean', 'jshint', 'jade', 'instrument', 'env:coverage', 'nodeTests', 'generate', 'storeCoverage', 'browserTests', 'makeReport']);
+  grunt.registerTask('test', ['clean', 'jshint', 'jade', 'instrument', 'env:coverage', 'nodeTests', 'generate', 'storeCoverage', 'browserTests', 'debugAppVeyor', 'makeReport']);
 
   // Travis CI task.
   grunt.registerTask('travis', ['test']);
