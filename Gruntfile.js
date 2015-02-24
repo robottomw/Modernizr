@@ -190,6 +190,9 @@ module.exports = function( grunt ) {
   grunt.registerTask('debugAppVeyor', 'output files while im trying to debug appveyor faliures', function() {
     var reports = grunt.file.expand('test/coverage/reports/**/*.json');
     reports.forEach(function(report) {
+      console.log('VVVVVVVVVVVVVVVVVVVVVVVVVVVV');
+      console.log(report);
+      console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
       console.log(grunt.file.read(report));
     });
   });
